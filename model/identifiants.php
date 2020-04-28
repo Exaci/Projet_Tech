@@ -1,7 +1,12 @@
 <?php
 try
 {
-$base = new PDO ('mysql:host=dbserver;dbname=tbelley','tbelley','jocelyne1999');
+$config = parse_ini_file("private/config.ini", TRUE);
+$mysql = $config['mysql'];
+$dbname = $mysql['dbname'];
+$db = new PDO('mysql:host=' . $mysql['host'] . ';dbname=' . $mysql['dbname'], $mysql['user'], $mysql['passwd'], array(
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+                ));
 }
 catch (Exception $e)
 {
